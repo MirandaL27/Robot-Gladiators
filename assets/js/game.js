@@ -1,22 +1,24 @@
-
+//win - player defeats enemy robots by making their health go to zero 
+//*player must fight each enemy robot and defeat each enemy robot
+//lose - the player's health goes to zero
 var playerName = window.prompt("What is your robot's name?");
 
 var playerHealth = 100;
 var playerAttack = 10;
 var playerMoney = 10;
 
-var enemyName = "Roboto";
+var enemyRobots = ["Roboto", "Amy Android", "Robo Trumble"];
 var enemyHealth = 50;
 var enemyAttack = 12;
 
-function fight(){
+
+var fight = function fight(enemyName){
     window.alert("Welcome to Robot Gladiators!");
     var promptFight = window.prompt("Would you like to FIGHT or SKIP this battle? Enter 'F' or 'S' to choose.");
-    console.log("promptFight = " + promptFight);
 
     if(promptFight == "F" || promptFight == "f"){
         enemyHealth -= playerAttack;
-        console.log("eneamyHealth = " + enemyHealth);
+        console.log(playerName+" attacked " + enemyName + ". " + enemyName + " now has " + enemyHealth + " remaining.");
     
         if(enemyHealth <= 0){
             window.alert(enemyName + " has died!");
@@ -26,7 +28,7 @@ function fight(){
         }
     
         playerHealth -= enemyAttack;
-        console.log("playerhealth = "+  playerHealth);
+        console.log(enemyName+" attacked " + playerName + ". " + playerName + " now has " + playerHealth + " remaining.");
     
         if(playerHealth <= 0){
             window.alert(playerName + " has died!");
@@ -54,4 +56,6 @@ function fight(){
 
 }
 
-fight();
+for(var i = 0; i<enemyRobots.length;i++){
+    fight(enemyRobots[i]);
+}

@@ -13,29 +13,31 @@ var enemyAttack = 12;
 
 
 var fight = function fight(enemyName){
-    window.alert("Welcome to Robot Gladiators!");
     var promptFight = window.prompt("Would you like to FIGHT or SKIP this battle? Enter 'F' or 'S' to choose.");
-
     if(promptFight == "F" || promptFight == "f"){
-        enemyHealth -= playerAttack;
-        console.log(playerName+" attacked " + enemyName + ". " + enemyName + " now has " + enemyHealth + " remaining.");
-    
-        if(enemyHealth <= 0){
-            window.alert(enemyName + " has died!");
+
+        while(enemyHealth > 0){
+            enemyHealth -= playerAttack;
+            console.log(playerName+" attacked " + enemyName + ". " + enemyName + " now has " + enemyHealth + " remaining.");
+        
+            if(enemyHealth <= 0){
+                window.alert(enemyName + " has died!");
+            }
+            else{
+                window.alert(enemyName + " still has " + enemyHealth + " hit points left.");
+            }
+        
+            playerHealth -= enemyAttack;
+            console.log(enemyName+" attacked " + playerName + ". " + playerName + " now has " + playerHealth + " remaining.");
+        
+            if(playerHealth <= 0){
+                window.alert(playerName + " has died!");
+            }
+            else{
+                window.alert(playerName + " still has " + playerHealth + " hit points left.");
+            }
         }
-        else{
-            window.alert(enemyName + " still has " + enemyHealth + " hit points left.");
-        }
-    
-        playerHealth -= enemyAttack;
-        console.log(enemyName+" attacked " + playerName + ". " + playerName + " now has " + playerHealth + " remaining.");
-    
-        if(playerHealth <= 0){
-            window.alert(playerName + " has died!");
-        }
-        else{
-            window.alert(playerName + " still has " + playerHealth + " hit points left.");
-        }
+
     }
     else if(promptFight == "S" || promptFight == "s"){
         var confirmSkip = window.confirm("Are you sure you want to skip this fight?");
@@ -57,5 +59,7 @@ var fight = function fight(enemyName){
 }
 
 for(var i = 0; i<enemyRobots.length;i++){
+    //debugger;
+    enemyHealth = 50;
     fight(enemyRobots[i]);
 }

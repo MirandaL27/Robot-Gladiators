@@ -12,6 +12,8 @@ var enemyHealth = 50;
 var enemyAttack = 12;
 
 
+console.log(Math.PI);
+
 var fight = function fight(enemyName){
 
     while(playerHealth > 0 && enemyHealth > 0){
@@ -20,14 +22,17 @@ var fight = function fight(enemyName){
             var confirmSkip = window.confirm("Are you sure you want to skip this fight?");
     
             if(confirmSkip){
-                playerMoney -= 10;
+                //playerMoney -= 10;
+                playerMoney = Math.max(0, playerMoney-10);
                 window.alert(playerName + " has chosen to skip the fight!");
                 console.log("playerMoney = " + playerMoney);
                 break;
             }            
         }
 
-        enemyHealth -= playerAttack;
+        //enemyHealth -= playerAttack;
+        var damage = randomNum(playerAttack-3, playerAttack);
+        enemyHealth = Math.max(0, enemyHealth-damage);
         console.log(playerName+" attacked " + enemyName + ". " + enemyName + " now has " + enemyHealth + " remaining.");
         
         if(enemyHealth <= 0){
@@ -38,7 +43,9 @@ var fight = function fight(enemyName){
             window.alert(enemyName + " still has " + enemyHealth + " hit points left.");
         }
         
-        playerHealth -= enemyAttack;
+        //playerHealth -= enemyAttack;
+        var damage = randomNum(enemyAttack-3, enemyAttack);
+        playerHealth = Math.max(0, playerHealth-damage);
         console.log(enemyName+" attacked " + playerName + ". " + playerName + " now has " + playerHealth + " remaining.");
         
         if(playerHealth <= 0){
@@ -56,6 +63,8 @@ var startGame = function(){
     playerHealth = 100;
     playerAttack = 10;
     playerMoney = 10;
+    //enemyHealth = Math.floor(Math.random()*21) + 40; // enemy health is between 40 and 60
+    enemyHealth = randomNum(40,60);
 
     for(var i = 0; i<enemyRobots.length;i++){
         //debugger;
@@ -139,6 +148,11 @@ var shopFunction = function(){
             break;
     }
 
+}
+
+var randomNum = function(min, max){
+    var value = Math.floor(Math.random() * (min-max+1)) + min;
+    return value;
 }
 
 startGame();
